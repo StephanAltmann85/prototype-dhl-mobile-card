@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Mobile Kundenkarte</title>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+
+    <script>window.$ = window.jQuery = require('jquery');</script>
+  </head>
+  <body>
+    <div id="content">
+      <div id="barcode">
+        <b>Postnummer:</b> <span id="postnummer">890906793</span>
+
+        <canvas id="barcode--output"></canvas>
+        <!-- display settings if not set -->
+      </div>
+      
+      <div id="settings">
+        <input type="text" name="pnr" />
+      </div>
+
+      <div id="about">
+        test
+        <!-- Todo: donate button -->
+      </div>
+      
+    </div>
+    <div id="bar--actions" class="bar">
+      <div class="bar--action-icon" id="btn--start">
+        <span class="fas fa-home fa-2x"></span>
+        <p class="icon--label">Start</p>
+      </div>
+      
+      <div class="bar--action-icon" id="btn--settings">
+        <span class="fas fa-cogs fa-2x"></span>
+        <p class="icon--label">Einstellungen</p>
+      </div>
+
+      <div class="bar--action-icon" id="btn--about">
+          <span class="fas fa-info fa-2x"></span>
+          <p class="icon--label">Über</p>
+      </div>
+
+    <!-- Todo: add translation -->
+    <!-- error if postnr not a number -->
+    </div>
+
+    <script>
+      //Todo: move to external file
+      var barCode = require('./func/bar_code.js');
+      var JsBarcode = require('jsbarcode');
+      var Canvas = require("canvas");
+
+      $( document ).ready( function() {
+        
+        var postnummer = $( "#postnummer" ).html();
+        
+        $( '#btn--settings' ).on('click', function() {
+          $( '#settings').show();
+          $( '#btn--start' ).css('display', 'inline-block');
+          $( '#barcode, #about, #btn--settings').hide();
+        });
+
+        $( '#btn--about' ).on('click', function() {
+          $( '#about').show();
+          $( '#barcode, #settings').hide();
+        });
+
+        $( '#btn--start' ).on('click', function() {
+          $( '#barcode').show();
+          $( '#btn--settings' ).css('display', 'inline-block');
+          $( '#about, #settings, #btn--start').hide();
+        });
+
+        console.log(barCode.getBarCode(postnummer));  
+
+        JsBarcode("#barcode--output", barCode.getBarCode(postnummer), {
+          format: "ITF",
+          lineColor: "#000",
+
+          displayValue: false
+        });
+      })
+    </script>
+  </body>
+</html>

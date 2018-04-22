@@ -1,0 +1,27 @@
+{
+  "name": "packstation-mobile",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "dhl",
+    "packstation",
+    "kundenkarte",
+    "barcode",
+    "app"
+  ],
+  "author": "salty",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.8.4"
+  },
+  "dependencies": {
+    "canvas": "^1.6.10",
+    "electron-reload": "^1.2.2",
+    "jquery": "^3.3.1",
+    "jsbarcode": "^3.9.0"
+  }
+}
